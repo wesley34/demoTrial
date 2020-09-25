@@ -8,6 +8,7 @@ def default_route():
     return "Python Template";
 
 
+
 logger = logging.getLogger()
 handler = logging.StreamHandler()
 formatter = logging.Formatter(
@@ -24,4 +25,4 @@ if __name__ == "__main__":
     sock.bind(('localhost', 0))
     port = sock.getsockname()[1]
     sock.close()
-    app.run(port=5000)
+    app.run(port=3000)
