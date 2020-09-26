@@ -19,9 +19,12 @@ def evaluate_social():
         people = data.get(str(i)).get("people")
         spaces = data.get(str(i)).get("spaces")
         result.append(solution(seats,people,spaces))
-  
-    logging.info("My result :{}".format(result))
-    return json.dumps(result)
+    answer = {}
+    for i in range(len(data)):
+        answer[str(i)] = result[i]
+    final = {"answers": answer}
+    logging.info("My result :{}".format(final))
+    return json.dumps(final)
 
 def solution(seats,people,spaces):
     if seats < people:
