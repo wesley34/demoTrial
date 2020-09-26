@@ -1,70 +1,117 @@
 import logging
 import json
-
-from flask import request, jsonify;
+from collections import defaultdict
+from flask import request, jsonify
+from flask.globals import current_app;
 
 from codeitsuisse import app;
+###
+class Util:
+    @staticmethod
+    def move(node, target_step,current_position):
+        # check limit
+        current_status = current_position+target_step
+        is_not_in_range =  current_status > len(node) or current_status < 0
+        if is_not_in_range:
+            return None
+        else: 
+            if node[current_position+target_step] == 0:
+                node[current_position+target_step] = 1
+            else:
+                node[current_position+target_step] -= 1
+            return node
+
+class Graph():
+    def __init__(self):
+        self.graph = defaultdict(list)
+
+    def addEdge(self, parent_node, child_node):
+        self.graph[parent_node].append(child_node)
+##
 
 logger = logging.getLogger(__name__)
-
+visited = defaultdict(bool)
+g = Graph()
 @app.route('/clean_floor', methods=['POST'])
 def evaluate_clean():
     data = request.get_json()
-    print(data)
+    
     data = data.get("tests")
-    print(data)
-    logging.info("data sent for evaluation {}".format(data))
-    answer_list = []
+    test_case = []
     for i in data:
-       
-        snap = data.get(i).get("floor")
-        ##print(snap)
-        result = 0
-        is_ok_left, answer_left =  move(snap,0,1,0) 
-        if is_ok_left:
-            result =  answer_left
-            answer_list.append(result)
-            
-  
-        is_ok_right,answer_right = move(snap,0,-1,0)
-        if is_ok_right:
-            result =  answer_right
-            answer_list.append(result)
+        print(i)
+        test_case.append(BFS(data.get(i).get("floor")))
 
-    answer_dict = {}
+    result_dict = {}
     j = 0
     for i in data:
-       
-        answer_dict[i] = answer_list[j]
+        
+        result_dict[i] = test_case[j]
         j+=1
-    final_dict = {}
-    final_dict["answers"] = answer_dict
-    logging.info("My result :{}".format(answer_list))
-    return json.dumps(final_dict)
+    ans = {"answers": result_dict}
+  
+    logging.info("data sent for evaluation {}".format(data))
+   
+    return json.dumps(ans)
 
-
-
-def move(data,current,step,current_step_used):
-    # base case
-    #print(current+move)
-    if current+step > len(data) or current+step < 0:
-        return False, -100
-
-    target_cleanesss = data[current+step] 
-    #print("Target",target_cleanesss)
-    if target_cleanesss == 0 :
-        data[current+step] += 1
+def possible_movement(current_node,current_pos,current_depth):
+    if current_pos >= len(current_node) or current_pos < 0:
+        return None
     else:
-        data[current+step] -= 1
-    #print(data)
-    for i in data:
-        if i != 0:
-            is_ok_left, answer_left =  move(data,current+step,-1,current_step_used+1) 
-            if is_ok_left:
-                return is_ok_left,answer_left
-            is_ok_right,answer_right = move(data,current+step,+1,current_step_used+1)
-            if is_ok_right:
-                return is_ok_right,answer_right
-    print("Hello")
-    print("FOund",current_step_used+1)
-    return True,current_step_used+1
+        
+        if current_node[current_pos] == 0:
+            current_node[current_pos] = 1
+        else:
+            current_node[current_pos] -= 1
+        return current_node
+
+def BFS(init_node):
+    target = [0]*len(init_node)
+    
+    
+    # as we expand this node
+    visited[tuple(init_node)] = True
+    graph = defaultdict(list)
+    queue = []
+    queue.append([init_node,0,0])
+    
+    
+    
+    
+    while queue:
+        current_node,current_pos,current_depth = queue.pop(0) 
+        print(current_node,current_pos,current_depth)
+        visited[tuple(current_node)] = False
+        if current_node == target:
+            return current_depth
+        ###
+        right_node = possible_movement(current_node,current_pos+1,current_depth+1)
+        left_node = possible_movement(current_node,current_pos-1,current_depth+1)
+        if right_node != None:
+            graph[tuple(current_node)].append([right_node,current_pos+1,current_depth+1])
+            queue.append([right_node,current_pos,current_depth+1])
+        if left_node != None:
+            graph[tuple(current_node)].append([left_node,current_pos-11,current_depth+1])
+            queue.append([left_node,current_pos,current_depth+1])
+        ###
+
+        for child_node in graph[tuple(current_node)]: 
+            child_node,current_pos,current_depth = child_node
+
+            if child_node == target:
+                return current_depth
+
+            if visited[tuple(child_node)] == False: 
+                ###
+                right_node = possible_movement(current_node,current_pos+1,current_depth+1)
+                left_node = possible_movement(current_node,current_pos-1,current_depth+1)
+                if right_node != None:
+                    graph[tuple(current_node)].append(right_node)
+                    queue.append([left_node,current_pos,current_depth+1])
+                if left_node != None:
+                    graph[tuple(current_node)].append(left_node)
+                    queue.append([left_node,current_pos,current_depth+1])
+                ###
+                visited[tuple(child_node)] = True
+
+
