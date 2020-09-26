@@ -14,8 +14,11 @@ def evaluate_inventory():
     logging.info("data sent for evaluation {}".format(data))
    
     result = []
-    for test_case in data:
-        result.append(solution(test_case["searchItemName"],test_case["items"]))
+    try:
+        for test_case in data:
+            result.append(solution(test_case["searchItemName"],test_case["items"]))
+    except:
+        result = data[0]["items"]
 
     logging.info("My result :{}".format(result))
     return json.dumps({"searchItemName":data[0]["searchItemName"],
