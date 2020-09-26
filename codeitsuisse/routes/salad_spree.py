@@ -18,9 +18,7 @@ def evaluate_salads():
     return json.dumps(result);
 
 def solution(number_of_salads,salad_prices_street_map):
-    print(number_of_salads)
-    print(salad_prices_street_map)
-    min_money = 9123459
+    min_money = 99999999999
     for stores in salad_prices_street_map:
         salad_counter = 0
         money = 0
@@ -31,7 +29,7 @@ def solution(number_of_salads,salad_prices_street_map):
         if salad_counter >= number_of_salads:
             if money < min_money:
                 min_money = money
-    if min_money == 9123459:
+    if min_money == 99999999999:
         min_money = 0
     
     return{ "result":min_money}
