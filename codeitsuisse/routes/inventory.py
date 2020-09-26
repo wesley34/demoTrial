@@ -102,13 +102,12 @@ def search_snap(word_1,word_2):
              
     question_list = [i for i in copy]
     print(markup)
-    try:
-        for i in markup:
-            #print(i[0],i[1])
-            question_list[i[0]] = i[1]
-            answer = "".join(str(x) for x in question_list)
-    except:
-        pass
+    
+    for i in markup:
+        #print(i[0],i[1])
+        question_list[i[0]] = i[1]
+        answer = "".join(str(x) for x in question_list)
+   
 
     answer = "".join(str(x) for x in question_list)
     
