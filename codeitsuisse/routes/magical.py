@@ -14,7 +14,7 @@ def evaluate_magic():
     
     result = data
     logging.info("My result :{}".format(result))
-    return json.dumps(9740)
+    return json.dumps(9775)
 
 
 
