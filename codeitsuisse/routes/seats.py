@@ -13,8 +13,8 @@ def evaluate_social():
     logging.info("data sent for evaluation {}".format(data))
     data = data.get("tests")
     result = []
-    for i in range(0,len(data)):
-        
+    for i in data:
+        print(data.get(i))
         seats = data.get(str(i)).get("seats")
         people = data.get(str(i)).get("people")
         spaces = data.get(str(i)).get("spaces")
@@ -22,7 +22,7 @@ def evaluate_social():
     answer = {}
     for i in range(len(data)):
         answer[str(i)] = result[i]
-    final = {"answers": answer}
+    final = {"answers": result}
     logging.info("My result :{}".format(final))
     return json.dumps(final)
 
@@ -35,16 +35,16 @@ def solution(seats,people,spaces):
     return total_sum
 
 def find(seats,people,spaces):
-    print(seats,people,spaces)
+   # print(seats,people,spaces)
     total_sum = 0
     if seats < 0:
         return 0
     if people == 0:
         if seats >= 0:
-            print("OK")
+            #print("OK")
             return 1
-    print("check spaces")
-    print(spaces,int(seats))
+    #print("check spaces")
+    # print(spaces,int(seats))
     for i in range(spaces,int((seats))):
         total_sum+=find(seats-i-1,people-1,spaces)
     return total_sum
