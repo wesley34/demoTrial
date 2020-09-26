@@ -68,7 +68,10 @@ def search_snap(word_1,word_2):
                 # check if need replacement
                 #print("you want to check")
                 #print(word_2[word_2_counter+1], word_1[word_1_counter+1])
-                check_ch = word_1[word_1_counter+1]
+                try:
+                    check_ch = word_1[word_1_counter+1]
+                except:
+                    break
                 
                     
                 after_pointer = word_2.find(check_ch,word_2_counter)
@@ -102,7 +105,7 @@ def search_snap(word_1,word_2):
             answer = "".join(str(x) for x in question_list)
     except:
         pass
-    
+
     answer = "".join(str(x) for x in question_list)
     
     return answer
