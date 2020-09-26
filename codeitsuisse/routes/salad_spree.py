@@ -13,7 +13,7 @@ def evaluate_salads():
     logging.info("data sent for evaluation {}".format(data))
     number_of_salads = data.get("number_of_salads");
     salad_prices_street_map = data.get("salad_prices_street_map");
-    
+    print(jsonify(salad_prices_street_map))
     result = solution(number_of_salads,salad_prices_street_map)
     logging.info("My result :{}".format(result))
     return json.dumps(result);
@@ -25,7 +25,7 @@ def get_cheapest_queue(cheapest_at_the_store,current_price):
             cheapest_at_the_store[i] = current_price
             break
     cheapest_at_the_store.sort()
-  
+    
     return cheapest_at_the_store
 
 
