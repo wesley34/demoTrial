@@ -40,13 +40,13 @@ def solution(number_of_salads,salad_prices_street_map):
         one_store_total_price = 0
         temp = []
 
-        for salad in store:
-            if salad != "X":
+        for i in range(len(store)):
+            if store[i] != "X":
                 consec_counter+=1
-                current_price = int(salad)
+                current_price = int(store[i])
                 temp.append(current_price)
             
-            if salad == "X":
+            if store[i] == "X" or i == len(store)-1:
                 if consec_counter >= number_of_salads:
                     # sort it
                     temp.sort()
@@ -55,17 +55,13 @@ def solution(number_of_salads,salad_prices_street_map):
                         one_store_total_price += temp[i]
                     if min_money > one_store_total_price:
                         min_money = one_store_total_price
-                    one_store_total_price = 0
+                   
+                one_store_total_price = 0
                 temp = []
                 consec_counter = 0
-        if consec_counter >= number_of_salads:
-            # sort it
-            temp.sort()
-            # get the answer
-            for i in range(number_of_salads):
-                one_store_total_price += temp[i]
-            if min_money > one_store_total_price:
-                min_money = one_store_total_price
+
+       
+    
 
     if min_money == original:
         min_money = 0
