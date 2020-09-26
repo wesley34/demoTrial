@@ -32,6 +32,8 @@ def get_cheapest_queue(cheapest_at_the_store,current_price):
 def solution(number_of_salads,salad_prices_street_map):
     min_money = 99999999999
     original = 99999999999
+    print(number_of_salads)
+    print(salad_prices_street_map)
     for store in salad_prices_street_map:
 
         consec_counter = 0
