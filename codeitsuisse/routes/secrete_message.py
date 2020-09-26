@@ -16,12 +16,13 @@ def evaluate_encrypt():
         result.append(encrypt(test_case["n"],test_case["text"]))
 
     logging.info("My result :{}".format(result))
-    return jsonify(result)
+    return jsonify(result);
 
 def encrypt(n,text):
+    
     processed_text = ""
     for ch in text:
-        if ch.isalumn():
+        if ch.isalnum():
             processed_text += ch.upper()
     
     start = 0
@@ -43,7 +44,7 @@ def encrypt(n,text):
         str_index = i//n
 
         result += list_of_substrings[str_index_in_list][str_index]
-    
+
     return result
 
 
