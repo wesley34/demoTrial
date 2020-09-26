@@ -44,6 +44,7 @@ def search_snap(word_1,word_2):
     
     #print(word_1,word_2)
     markup = []
+    
     while word_2_counter < len(word_2):
        
         #print(word_1[word_1_counter],word_2[word_2_counter])
@@ -68,10 +69,10 @@ def search_snap(word_1,word_2):
                 # check if need replacement
                 #print("you want to check")
                 #print(word_2[word_2_counter+1], word_1[word_1_counter+1])
-                try:
-                    check_ch = word_1[word_1_counter+1]
-                except:
+                if word_1_counter+1 >= len(word_1)-1:
                     break
+                check_ch = word_1[word_1_counter+1]
+                
                 
                     
                 after_pointer = word_2.find(check_ch,word_2_counter)
