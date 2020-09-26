@@ -9,15 +9,16 @@ logger = logging.getLogger(__name__)
 
 @app.route('/clean_floor', methods=['POST'])
 def evaluate_clean():
-    data = request.get_json();
+    data = request.get_json()
+    print(data)
     data = data.get("tests")
     print(data)
     logging.info("data sent for evaluation {}".format(data))
     answer_list = []
     for i in data:
-        print("asd",i)
+       
         snap = data.get(i).get("floor")
-        print(snap)
+        ##print(snap)
         result = 0
         is_ok_left, answer_left =  move(snap,0,1,0) 
         if is_ok_left:
