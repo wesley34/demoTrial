@@ -68,11 +68,11 @@ def line_intersection(line1, line2):
     y = det(d, ydiff) / div
 
 
-    # if 64.8 == round(x * 100)/100  or -21 == round(x * 100)/100 :
-    #     print("DEbug")
-    #     print(x,y)
-    #     print(line1,line2)
-    if x > line2[0][0]  and x >line2[1][0] or x < line2[0][0] and  x < line2[1][0]  :
+    if 60 == round(x * 100)/100  or -21 == round(x * 100)/100 :
+        print("DEbug")
+        print(x,y)
+        print(line1,line2)
+    if x > line2[0][0]  and x >line2[1][0] or x < line2[0][0] and  x < line2[1][0] or y > line2[0][1]  and y >line2[1][1] or y < line2[0][1]  and y < line2[1][1]  :
         return None
     
     return round(x * 100) / 100, round(y * 100) / 100
