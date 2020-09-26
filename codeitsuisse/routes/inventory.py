@@ -23,14 +23,18 @@ def evaluate_inventory():
     
 
 def solution(searchItemName,searchResult):
-    print("Start")
- 
+    #print("Start")
+    
     word_2 = searchItemName
     copy = searchItemName
     result = []
     for word_1 in searchResult:
-        result.append(search_snap(word_1,word_2))
+        try:
+            result.append(search_snap(word_1,word_2))
+        except:
+            result.append(word_1)
     return result
+
     #### algo part
     
 
@@ -108,8 +112,8 @@ def search_snap(word_1,word_2):
     
         if len(markup) > 0:
             question_list = [i for i in copy]
-            print(markup)
-            print("qL",question_list)
+            #print(markup)
+            #print("qL",question_list)
             for i in markup:
                 #print(i[0],i[1])
                 question_list[i[0]] = i[1]
