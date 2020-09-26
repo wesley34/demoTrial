@@ -46,7 +46,10 @@ def search_snap(word_1,word_2):
     markup = []
     
     while word_2_counter < len(word_2) or word_1_counter < len(word_1):
-       
+        if word_1_counter > len(word_1)-1:
+            break
+        if word_2_counter > len(word_2)-1:
+            break
         #print(word_1[word_1_counter],word_2[word_2_counter])
         if word_1[word_1_counter] == word_2[word_2_counter]:
             word_1_counter += 1
