@@ -15,7 +15,7 @@ def evaluate_salads():
     salad_prices_street_map = data.get("salad_prices_street_map");
     result = solution(number_of_salads,salad_prices_street_map)
     logging.info("My result :{}".format(result))
-    return json.dumps(result);
+    return jsonify(result);
 
 def solution(number_of_salads,salad_prices_street_map):
     print(number_of_salads)
