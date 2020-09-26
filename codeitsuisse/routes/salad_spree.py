@@ -53,6 +53,7 @@ def solution(number_of_salads,salad_prices_street_map):
                     if min_money > one_store_total_price:
                         min_money =one_store_total_price
                 temp = []
+                consec_counter = 0
 
     if min_money == original:
         min_money = 0
