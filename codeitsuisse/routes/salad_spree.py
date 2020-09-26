@@ -15,7 +15,7 @@ def evaluate_salads():
     salad_prices_street_map = data.get("salad_prices_street_map");
     result = solution(number_of_salads,salad_prices_street_map)
     logging.info("My result :{}".format(result))
-    return jsonify(result);
+    return json.dumps(result);
 
 def solution(number_of_salads,salad_prices_street_map):
     print(number_of_salads)
@@ -34,7 +34,7 @@ def solution(number_of_salads,salad_prices_street_map):
     if min_money == 9123459:
         min_money = 0
     
-    return min_money
+    return{ "result":min_money}
 
 
 
