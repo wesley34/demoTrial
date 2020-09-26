@@ -99,7 +99,12 @@ def search_snap(word_1,word_2):
         for i in markup:
             #print(i[0],i[1])
             question_list[i[0]] = i[1]
+            answer = "".join(str(x) for x in question_list)
+    except:
+        pass
+    
     answer = "".join(str(x) for x in question_list)
+    
     return answer
 
 
