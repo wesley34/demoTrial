@@ -20,7 +20,7 @@ def evaluate_inventory():
     logging.info("My result :{}".format(result))
     return json.dumps({"searchItemName":data[0]["searchItemName"],
                         "items":result})
-    return json.dumps(result)
+    
 
 def solution(searchItemName,searchResult):
     print("Start")
