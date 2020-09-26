@@ -100,16 +100,18 @@ def search_snap(word_1,word_2):
                     markup.append([in_between, "-"+copy[in_between]])
                 word_2_counter = found_pointer
              
-    question_list = [i for i in copy]
-    print(markup)
-    
-    for i in markup:
-        #print(i[0],i[1])
-        question_list[i[0]] = i[1]
-        answer = "".join(str(x) for x in question_list)
+   
+    # print(markup)
+    answer = copy
+    if len(markup) > 0:
+        question_list = [i for i in copy]
+        for i in markup:
+            #print(i[0],i[1])
+            question_list[i[0]] = i[1]
+            answer = "".join(str(x) for x in question_list)
    
 
-    answer = "".join(str(x) for x in question_list)
+        answer = "".join(str(x) for x in question_list)
     
     return answer
 
