@@ -103,8 +103,10 @@ def search_snap(word_1,word_2):
    
     # print(markup)
     answer = copy
+    
     if len(markup) > 0:
         question_list = [i for i in copy]
+        print("qL",question_list)
         for i in markup:
             #print(i[0],i[1])
             question_list[i[0]] = i[1]
